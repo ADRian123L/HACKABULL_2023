@@ -1,6 +1,13 @@
 from api import OpenAI
+import asyncio
 import os
 
-# The program creates an object that is used to access the OpenAI's API.
-key = os.environ.get("OPENAI_API_KEY")
-AI : OpenAI = OpenAI(api_key = key)
+async def main():
+    key = os.environ.get("OPENAI_API_KEY")
+    AI: OpenAI = OpenAI(key)
+    AI.set_prompt(prompt="What is the binary representation of 10?")
+    response = await OpenAI.generate_text()
+    print(response)
+
+asyncio.run(main())
+
