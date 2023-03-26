@@ -12,19 +12,21 @@ class Decimal_Binary_Convert:
     def do(self):
         
         self.mw = tkinter.Tk()
-        self.mw.title('kilometer conversion')
+        self.mw.title('Decimal-Binary conversion')
 
         #create frames
         self.top =tkinter.Frame()
+        
 
         self.bottom1 = tkinter.Frame() #default-applied to your only window attribute
         self.bottom2 = tkinter.Frame()
 
         #create widgets for top frame
+        self.text = tkinter.Label(self.top, text = "To convert a decimal number to a binary number, you can follow these steps:\n\
+1. Divide the decimal number by 2.\n2.Write down the remainder (either 0 or 1).\n3.Divide the quotient (the result of the division in step 1) by 2.\n\
+4. Write down the remainder.\n5.Repeat steps 3 and 4 until the quotient becomes 0.\n6.Write the remainders in reverse order.\nLet's do some practice:\n")
         self.prompt = tkinter.Label(self.top, text = 'Enter a decimal number:')
         
-        
-
         self.kentry = tkinter.Entry(self.top, width = 20) #for text entry
         self.prompt2 = tkinter.Label(self.bottom1, text = 'Enter the quotient: ')
         self.kentry2 = tkinter.Entry(self.bottom1, width = 8)
@@ -32,6 +34,7 @@ class Decimal_Binary_Convert:
         self.kentry3 = tkinter.Entry(self.bottom1, width = 8)
 
         #pack top widgets
+        self.text.pack()
         self.prompt.pack(side = 'left')
         self.kentry.pack(side = 'left')
         self.prompt2.pack(side = 'left')
@@ -91,6 +94,7 @@ class Decimal_Binary_Convert:
                     self.bottom3.pack()
                     self.j += 1
                     self.divident = quotient
+                   
                     self.append()
                 else:
                     self.answer = tkinter.Label(self.bottom3, text = f"Sorry, you made it wrong.\nAnswer should be: \n quotient:{quotient}, Reminder: {reminder}")
@@ -124,6 +128,7 @@ class Decimal_Binary_Convert:
                     self.answer.pack()
                     self.bottom3.pack()
                     self.j += 1
+                   
                     self.divident = quotient
                     self.append()
                 else:
@@ -147,6 +152,7 @@ class Decimal_Binary_Convert:
                     self.answer.pack()
 
     def append(self):
+        self.i = 0
         decimal = int(self.kentry2.get())
         self.bottom4 = tkinter.Frame()
         self.prompt = tkinter.Label(self.bottom4, text = f"Let's {decimal} divide by 2 now!")
