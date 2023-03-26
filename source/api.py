@@ -16,6 +16,7 @@ class OpenAI:
         self.temperature: float = 0.5
         self.n: int = 1
         self.prompt: str = "Testing the OpenAI API."
+        self.image_prompt = "a white siamese cat"
 
     def generate_text(self) -> str:
         """The method generates text based on the prompt."""
@@ -47,17 +48,44 @@ class OpenAI:
     
     def set_api_key(self, api_key : str) -> None:
         """The method sets the API key."""
-        self.api_key = api_key
+        self.__api_key = api_key
     
     def set_prompt(self, prompt:str) -> None:
         """The method sets the prompt."""
         self.prompt = prompt
 
+    def set_models(self, index_model: int = 1) -> None:
+        """The method sets the model based on the index."""
+        models = openai.Engine.list()
+        self.model = models[index_model].id
+
+    def get_models(self) -> None:
+        """The method returns the list of models."""
+        models = openai.Engine.list()
+        for index, model in enumerate(models["data"]):
+            print(f"Index: {index}, Model ID: {model.id}")
+
+    def get_image(self) -> str:
+        """The method returns the image."""
+        response = openai.Image.create(
+            prompt= self.image_prompt,
+            n= self.n,
+            size="1024x1024"
+        )
+        image_url = response['data'][0]['url']
+
+        response = requests.get(image_url)
+        if response.status_code == 200:
+            with open("image.png", "wb") as f:
+                f.write(response.content)
+        else:
+            print("Error downloading image")
+        return image_url
+    
+    def set_image_prompt(self, image_prompt: str) -> None:
+        """The method sets the image prompt."""
+        self.image_prompt = image_prompt
+        
 if __name__ == "__main__":
     # The program creates an object that is used to access the OpenAI's API.
-    key = os.environ.get("OPENAI_API_KEY")
-    AI : OpenAI = OpenAI(api_key = key)
-
-    # The program generates text based on the prompt.
-    prompt = "What is the binary representation of 10?"
-    print(AI.generate_text(prompt))
+    pass

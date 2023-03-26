@@ -1,13 +1,14 @@
 from api import OpenAI
-import asyncio
+import openai
 import os
 
-async def main():
-    key = os.environ.get("OPENAI_API_KEY")
-    AI: OpenAI = OpenAI(key)
-    AI.set_prompt(prompt="What is the binary representation of 10?")
-    response = await OpenAI.generate_text()
-    print(response)
+import openai
 
-asyncio.run(main())
-
+# Set your API key
+key = os.getenv("OPENAI_API_KEY")
+AI: OpenAI = OpenAI(api_key = key)
+AI.set_prompt("Testing the OpenAI API, can you tell something about AI?")
+models = openai.Engine.list()
+data = models["data"]
+idt = data[0].id
+print(idt)
