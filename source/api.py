@@ -56,8 +56,8 @@ class OpenAI:
 
     async def generate_text(self) -> str:
         """The method generates text based on the prompt."""
-        if prompt in self.cache:
-            return self.cache[prompt]
+        if self.prompt in self.cache:
+            return self.cache[self.prompt]
         
         async with aiohttp.ClientSession() as session:
             headers = {
@@ -66,13 +66,13 @@ class OpenAI:
             }
             data = {
                 "model": self.model,
-                "prompt": prompt,
+                "prompt": self.prompt,
                 "max_tokens": self.max_tokens,
                 "temperature": self.temperature,
                 "top_p": 1,
                 "frequency_penalty": 0,
                 "presence_penalty": 0,
-                "n": n
+                "n": self.n
             }
             async with session.post("https://api.openai.com/v1/engines/davinci/completions", headers = headers, json = data) as response:
                 response = await response.json()
