@@ -12,7 +12,7 @@ class Decimal_Binary_Convert:
     def do(self):
         
         self.mw = tkinter.Tk()
-        self.mw.title('Decimal-Binary conversion')
+        self.mw.title('Decimal-Binary Conversion')
 
         #create frames
         self.top =tkinter.Frame()
@@ -176,15 +176,6 @@ class Decimal_Binary_Convert:
         else:
             print('You are wrong')
         
-        
-    
-        
-        #displat result
-        
-
-
-#__driver portion__
-
-#create an object
-kc = Decimal_Binary_Convert()
-kc.do()
+if __name__ == '__main__':        
+    kc = Decimal_Binary_Convert()
+    kc.do()
