@@ -3,23 +3,35 @@ import openai
 import json
 import requests
 import os
-import asyncio
-import aiohttp
 
 class OpenAI:
     """The class creates an object that is used to access the OpenAI's API."""
-    # The class attributes are used to store the API key and the model.
-    
-    def __init__(self, api_key : str, model="davinci", temperature: float = 0.5, max_tokens: int = 100, prompt: str = "") -> None:
+    def __init__(self, api_key : str, model="davinci") -> None:
         """The constructor initializes the object with the API key and the model."""
         self.__api_key = api_key
         self.model = model
-        openai.api_key = self.api_key
+        openai.api_key = self.__api_key
         openai.Engine.list()
-        self.cache = {}
-        self.temperature: float = temperature
-        self.max_tokens: int = max_tokens
-        self.prompt: str = prompt
+        self.max_tokens: int = 100
+        self.temperature: float = 0.5
+        self.n: int = 1
+        self.prompt: str = "Testing the OpenAI API."
+
+    def generate_text(self) -> str:
+        """The method generates text based on the prompt."""
+        response = openai.Completion.create(
+            engine = self.model,
+            prompt = self.prompt,
+            max_tokens = self.max_tokens,
+            temperature = self.temperature,
+            n = self.n,
+            stop = None,
+        )
+
+        if response.choices:
+            return response.choices[0].text
+        else:
+            return "No response from the API."
 
     def get_model(self) -> str:
         """The method returns the model."""
@@ -35,56 +47,17 @@ class OpenAI:
     
     def set_api_key(self, api_key : str) -> None:
         """The method sets the API key."""
-        self.__api_key = api_key
+        self.api_key = api_key
     
-    def get_temperature(self) -> float:
-        """The method returns the temperature."""
-        return self.temperature
-    
-    def set_max_tokens(self, max_tokens : int) -> None:
-        """The method sets the max_tokens."""
-        self.max_tokens = max_tokens
-    
-    def get_max_tokens(self) -> int:
-        """The method returns the max_tokens."""
-        return self.max_tokens
-    
-    def temperature(self, temperature : float = 0.5) -> None:
-        """The method sets the temperature."""
-        self.temperature = temperature
-
-    async def generate_text(self) -> str:
-        """The method generates text based on the prompt."""
-        if self.prompt in self.cache:
-            return self.cache[self.prompt]
-        
-        async with aiohttp.ClientSession() as session:
-            headers = {
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {self.__api_key}"
-            }
-            data = {
-                "model": self.model,
-                "prompt": self.prompt,
-                "max_tokens": self.max_tokens,
-                "temperature": self.temperature,
-                "top_p": 1,
-                "frequency_penalty": 0,
-                "presence_penalty": 0,
-                "n": self.n
-            }
-            async with session.post("https://api.openai.com/v1/engines/davinci/completions", headers = headers, json = data) as response:
-                response = await response.json()
-                if response["choices"]:
-                    self.cache[prompt] = response["choices"][0]["text"]
-                    return response["choices"][0]["text"]
-                else:
-                    return "No response from the API."
-    
-
-            
-
+    def set_prompt(self, prompt:str) -> None:
+        """The method sets the prompt."""
+        self.prompt = prompt
 
 if __name__ == "__main__":
     # The program creates an object that is used to access the OpenAI's API.
-    pass
+    key = os.environ.get("OPENAI_API_KEY")
+    AI : OpenAI = OpenAI(api_key = key)
+
+    # The program generates text based on the prompt.
+    prompt = "What is the binary representation of 10?"
+    print(AI.generate_text(prompt))
