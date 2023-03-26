@@ -4,34 +4,26 @@ import tkinter.messagebox
 #__class definition__
 class kiloConvert:
     def __init__(self):
-        #create main window
+        """The constructor initializes the object with the API key and the model."""
         self.i = 0
-    def do(self):
-        
-        self.mw = tkinter.Tk()
 
+    def do(self) -> None:
+        """The method creates the main window."""
+        self.mw = tkinter.Tk() #main window
+        self.mw.title('kilometer conversion') #title of the window
 
-
-        self.mw.title('kilometer conversion')
-
-        #create frames
-        self.top =tkinter.Frame()
-
+        self.top =tkinter.Frame() #default-applied to your only window attribute
         self.bottom1 = tkinter.Frame() #default-applied to your only window attribute
-        self.bottom2 = tkinter.Frame()
+        self.bottom2 = tkinter.Frame() #default-applied to your only window attribute
 
-        #create widgets for top frame
-        self.prompt = tkinter.Label(self.top, text = 'Enter a decimal number:')
-        
-        
-
+        self.prompt = tkinter.Label(self.top, text = 'Enter a decimal number:') #for text entry
         self.kentry = tkinter.Entry(self.top, width = 20) #for text entry
-        self.prompt2 = tkinter.Label(self.bottom1, text = 'Enter the quotient: ')
-        self.kentry2 = tkinter.Entry(self.bottom1, width = 8)
-        self.prompt3 = tkinter.Label(self.bottom1, text = 'Enter the reminder: ')
-        self.kentry3 = tkinter.Entry(self.bottom1, width = 8)
+        self.prompt2 = tkinter.Label(self.bottom1, text = 'Enter the quotient: ') #for text entry
+        self.kentry2 = tkinter.Entry(self.bottom1, width = 8) #for text entry
+        self.prompt3 = tkinter.Label(self.bottom1, text = 'Enter the reminder: ') #for text entry
+        self.kentry3 = tkinter.Entry(self.bottom1, width = 8) #for text entry   
 
-        #pack top widgets
+        # Pack the top widgets
         self.prompt.pack(side = 'left')
         self.kentry.pack(side = 'left')
         self.prompt2.pack(side = 'left')
@@ -39,26 +31,24 @@ class kiloConvert:
         self.prompt3.pack(side = 'left')
         self.kentry3.pack(side = 'left')
 
-        #create bottom widgets
+        # Pack the bottom widgets
         self.check = tkinter.Button(self.bottom2, text = 'Check', command = self.check)
         self.quit = tkinter.Button(self.bottom2, text = 'Quit', command = self.mw.destroy)
 
-        #pack bottom widgets
+        # Pack the buttons
         self.check.pack(side = 'left')
         self.quit.pack(side = 'left')
         
-        
-
-        #pack frames
+        # Pack the frames
         self.top.pack()#default is the top
         self.bottom1.pack()
         self.bottom2.pack(side = 'bottom')
 
-
-        #run the main loop
+        # Enter the tkinter main loop
         tkinter.mainloop()
         
-    def check(self):
+    def check(self) -> None:
+        """The method checks the answer."""
         self.i += 1
         print(self.i)
         if self.i <= 1:
@@ -88,12 +78,6 @@ class kiloConvert:
                 self.answer = tkinter.Label(self.bottom3, text = f"Sorry, you made it wrong.\nAnswer should be: \n quotient:{quotient}, Reminder: {reminder}")
                 self.answer.pack()
 
-        #displat result
-        
-
-
-#__driver portion__
-
-#create an object
-kc = kiloConvert()
-kc.do()
+if __name__ == "__main__":
+    kc = kiloConvert()
+    kc.do()
