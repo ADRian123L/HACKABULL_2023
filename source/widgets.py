@@ -2,28 +2,33 @@ import tkinter
 import tkinter.messagebox
 
 #__class definition__
-class kiloConvert:
+class Decimal_Binary_Convert:
     def __init__(self):
-        """The constructor initializes the object with the API key and the model."""
+        #create main window
         self.i = 0
+    def do(self):
+        
+        self.mw = tkinter.Tk()
+        self.mw.title('kilometer conversion')
 
-    def do(self) -> None:
-        """The method creates the main window."""
-        self.mw = tkinter.Tk() #main window
-        self.mw.title('kilometer conversion') #title of the window
+        #create frames
+        self.top =tkinter.Frame()
 
-        self.top =tkinter.Frame() #default-applied to your only window attribute
         self.bottom1 = tkinter.Frame() #default-applied to your only window attribute
-        self.bottom2 = tkinter.Frame() #default-applied to your only window attribute
+        self.bottom2 = tkinter.Frame()
 
-        self.prompt = tkinter.Label(self.top, text = 'Enter a decimal number:') #for text entry
+        #create widgets for top frame
+        self.prompt = tkinter.Label(self.top, text = 'Enter a decimal number:')
+        
+        
+
         self.kentry = tkinter.Entry(self.top, width = 20) #for text entry
-        self.prompt2 = tkinter.Label(self.bottom1, text = 'Enter the quotient: ') #for text entry
-        self.kentry2 = tkinter.Entry(self.bottom1, width = 8) #for text entry
-        self.prompt3 = tkinter.Label(self.bottom1, text = 'Enter the reminder: ') #for text entry
-        self.kentry3 = tkinter.Entry(self.bottom1, width = 8) #for text entry   
+        self.prompt2 = tkinter.Label(self.bottom1, text = 'Enter the quotient: ')
+        self.kentry2 = tkinter.Entry(self.bottom1, width = 8)
+        self.prompt3 = tkinter.Label(self.bottom1, text = 'Enter the reminder: ')
+        self.kentry3 = tkinter.Entry(self.bottom1, width = 8)
 
-        # Pack the top widgets
+        #pack top widgets
         self.prompt.pack(side = 'left')
         self.kentry.pack(side = 'left')
         self.prompt2.pack(side = 'left')
@@ -31,24 +36,24 @@ class kiloConvert:
         self.prompt3.pack(side = 'left')
         self.kentry3.pack(side = 'left')
 
-        # Pack the bottom widgets
+        #create bottom widgets
         self.check = tkinter.Button(self.bottom2, text = 'Check', command = self.check)
         self.quit = tkinter.Button(self.bottom2, text = 'Quit', command = self.mw.destroy)
 
-        # Pack the buttons
+        #pack bottom widgets
         self.check.pack(side = 'left')
         self.quit.pack(side = 'left')
-        
-        # Pack the frames
+
+        #pack frames
         self.top.pack()#default is the top
         self.bottom1.pack()
         self.bottom2.pack(side = 'bottom')
 
-        # Enter the tkinter main loop
+
+        #run the main loop
         tkinter.mainloop()
         
-    def check(self) -> None:
-        """The method checks the answer."""
+    def check(self):
         self.i += 1
         print(self.i)
         if self.i <= 1:
@@ -60,24 +65,53 @@ class kiloConvert:
             self.bottom3 = tkinter.Frame()
             if answer == quotient and answer2 == reminder:
                 self.answer = tkinter.Label(self.bottom3, text = f"You are right!")
+                self.answer.pack()
+                self.bottom3.pack()
+                self.append()
             else:
                 self.answer = tkinter.Label(self.bottom3, text = f"Sorry, you made it wrong.\nAnswer should be: \n quotient:{quotient}, Reminder: {reminder}")
-            self.answer.pack()
-            self.bottom3.pack()
+                self.answer.pack()
+                self.bottom3.pack()
         else:
             decimal = int(self.kentry.get())
             quotient = int(decimal / 2)
             reminder = decimal % 2
             answer = int(self.kentry2.get())
             answer2 = int(self.kentry3.get())
-             
+            self.answer.destroy()
             if answer == quotient and answer2 == reminder:
                 self.answer = tkinter.Label(self.bottom3, text = f"You are right!")
                 self.answer.pack()
+                self.append()
             else:
                 self.answer = tkinter.Label(self.bottom3, text = f"Sorry, you made it wrong.\nAnswer should be: \n quotient:{quotient}, Reminder: {reminder}")
                 self.answer.pack()
 
-if __name__ == "__main__":
-    kc = kiloConvert()
-    kc.do()
+    def append(self):
+        decimal = int(self.kentry2.get())
+        self.bottom4 = tkinter.Frame()
+        self.prompt = tkinter.Label(self.bottom4, text = f"Let's {decimal} divide by 2 now!")
+        self.prompt.pack()
+        self.bottom4.pack()
+        self.bottom5 = tkinter.Frame()
+        self.prompt2 = tkinter.Label(self.bottom5, text = "Enter the quotient: ")
+        self.kentry2 = tkinter.Entry(self.bottom5, width = 8)
+        self.prompt3 = tkinter.Label(self.bottom5, text = "Enter the reminder: ")
+        self.kentry3 = tkinter.Entry(self.bottom5, width = 8)
+        self.prompt2.pack(side = 'left')
+        self.kentry2.pack(side = 'left')
+        self.prompt3.pack(side = 'left')
+        self.kentry3.pack(side = 'left')
+        self.bottom5.pack()
+        
+    
+        
+        #displat result
+        
+
+
+#__driver portion__
+
+#create an object
+kc = Decimal_Binary_Convert()
+kc.do()
