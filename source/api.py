@@ -48,3 +48,11 @@ class OpenAI:
         else:
             return "No response from the API."
 
+if __name__ == "__main__":
+    # The program creates an object that is used to access the OpenAI's API.
+    key = os.environ.get("OPENAI_API_KEY")
+    AI : OpenAI = OpenAI(api_key = key)
+
+    # The program generates text based on the prompt.
+    prompt = "Do you know how to create widgets in Python?"
+    print(AI.generate_text(prompt))
