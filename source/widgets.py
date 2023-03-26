@@ -97,7 +97,7 @@ class Decimal_Binary_Convert:
                    
                     self.append()
                 else:
-                    self.answer = tkinter.Label(self.bottom3, text = f"Sorry, you made it wrong.\nAnswer should be: \n quotient:{quotient}, Reminder: {reminder}")
+                    self.answer = tkinter.Label(self.bottom3, text = f"Sorry, you made it wrong.\nAnswer should be: \n quotient:{quotient}, Remainder: {reminder}")
                     self.answer.pack()
                     self.bottom3.pack()
             else:
@@ -114,7 +114,7 @@ class Decimal_Binary_Convert:
                     self.divident = quotient
                     self.append()
                 else:
-                    self.answer = tkinter.Label(self.bottom3, text = f"Sorry, you made it wrong.\nAnswer should be: \n quotient:{quotient}, Reminder: {reminder}")
+                    self.answer = tkinter.Label(self.bottom3, text = f"Sorry, you made it wrong.\nAnswer should be: \n quotient:{quotient}, Remainder: {reminder}")
                     self.answer.pack()
         else:
             if self.i <= 1:
@@ -132,7 +132,7 @@ class Decimal_Binary_Convert:
                     self.divident = quotient
                     self.append()
                 else:
-                    self.answer = tkinter.Label(self.bottom3, text = f"Sorry, you made it wrong.\nAnswer should be: \n quotient:{quotient}, Reminder: {reminder}")
+                    self.answer = tkinter.Label(self.bottom3, text = f"Sorry, you made it wrong.\nAnswer should be: \n quotient:{quotient}, Remainder: {reminder}")
                     self.answer.pack()
                     self.bottom3.pack()
             else:
@@ -148,7 +148,7 @@ class Decimal_Binary_Convert:
                     self.divident = quotient
                     self.append()
                 else:
-                    self.answer = tkinter.Label(self.bottom3, text = f"Sorry, you made it wrong.\nAnswer should be: \n quotient:{quotient}, Reminder: {reminder}")
+                    self.answer = tkinter.Label(self.bottom3, text = f"Sorry, you made it wrong.\nAnswer should be: \n quotient:{quotient}, Remainder: {reminder}")
                     self.answer.pack()
 
     def append(self):
@@ -161,7 +161,7 @@ class Decimal_Binary_Convert:
         self.bottom5 = tkinter.Frame()
         self.prompt2 = tkinter.Label(self.bottom5, text = "Enter the quotient: ")
         self.kentry2 = tkinter.Entry(self.bottom5, width = 8)
-        self.prompt3 = tkinter.Label(self.bottom5, text = "Enter the reminder: ")
+        self.prompt3 = tkinter.Label(self.bottom5, text = "Enter the remainder: ")
         self.kentry3 = tkinter.Entry(self.bottom5, width = 8)
         self.prompt2.pack(side = 'left')
         self.kentry2.pack(side = 'left')
