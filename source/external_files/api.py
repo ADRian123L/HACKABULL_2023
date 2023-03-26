@@ -6,7 +6,7 @@ import os
 
 class OpenAI:
     """The class creates an object that is used to access the OpenAI's API."""
-    def __init__(self, api_key : str, model="davinci") -> None:
+    def __init__(self, api_key : str, model="davinci", image_prompt :str = "") -> None:
         """The constructor initializes the object with the API key and the model."""
         self.__api_key = api_key
         self.model = model
@@ -16,7 +16,7 @@ class OpenAI:
         self.temperature: float = 0.5
         self.n: int = 1
         self.prompt: str = "Testing the OpenAI API."
-        self.image_prompt = "a white siamese cat"
+        self.image_prompt = image_prompt
 
     def generate_text(self) -> str:
         """The method generates text based on the prompt."""
@@ -65,6 +65,10 @@ class OpenAI:
         for index, model in enumerate(models["data"]):
             print(f"Index: {index}, Model ID: {model.id}")
 
+    def set_image_prompt(self, image_prompt: str) -> None:
+        """The method sets the image prompt."""
+        self.image_prompt = image_prompt
+
     def get_image(self) -> str:
         """The method returns the image."""
         response = openai.Image.create(
@@ -82,10 +86,10 @@ class OpenAI:
             print("Error downloading image")
         return image_url
     
-    def set_image_prompt(self, image_prompt: str) -> None:
-        """The method sets the image prompt."""
-        self.image_prompt = image_prompt
         
 if __name__ == "__main__":
     # The program creates an object that is used to access the OpenAI's API.
+    AI : OpenAI = OpenAI(api_key = os.environ.get("OPENAI_API_KEY"))
+    AI.set_image_prompt("Create a clean vector illustration of abstract concept. The illustration should be simple and easy to understand. Make related to graphs. A put as title 'Binary-Decimal Conversion'.")
+    AI.get_image()
     pass
