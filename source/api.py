@@ -10,7 +10,6 @@ class OpenAI:
     """The class creates an object that is used to access the OpenAI's API."""
     # The class attributes are used to store the API key and the model.
     
-
     def __init__(self, api_key : str, model="davinci", temperature: float = 0.5, max_tokens: int = 100, prompt: str = "") -> None:
         """The constructor initializes the object with the API key and the model."""
         self.__api_key = api_key
